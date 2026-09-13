@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:pure_live/common/style/bundled_fonts.dart';
 import 'package:pure_live/pkg/canvas_danmaku/models/danmaku_item.dart';
 import 'package:pure_live/pkg/canvas_danmaku/models/danmaku_content_item.dart';
 
@@ -58,6 +59,7 @@ class SpecialDanmakuPainter extends CustomPainter {
           fontSize: item.fontSize,
           fontWeight: FontWeight.values[fontWeight],
           fontFamily: item.fontFamily,
+          fontFamilyFallback: bundledEmojiFontFallback,
           shadows: item.hasStroke ? [Shadow(color: Colors.black.withValues(alpha: alpha), blurRadius: 2)] : null,
         ),
       );

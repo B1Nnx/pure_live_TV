@@ -149,6 +149,9 @@ flutter:
     - family: PingFang
       fonts:
         - asset: assets/MiSans-Regular.ttf
+    - family: PureLiveEmoji
+      fonts:
+        - asset: assets/fonts/emoji/NotoColorEmoji.ttf
 flutter_intl:
   enabled: true
   arb_dir: lib/common/l10n

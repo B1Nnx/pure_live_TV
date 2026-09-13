@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:pure_live/common/style/bundled_fonts.dart';
 import 'package:pure_live/pkg/canvas_danmaku/utils/utils.dart';
 import 'package:pure_live/pkg/canvas_danmaku/danmaku_controller.dart';
 import 'package:pure_live/pkg/canvas_danmaku/models/danmaku_item.dart';
@@ -137,6 +138,8 @@ class _DanmakuScreenState extends State<DanmakuScreen> with TickerProviderStateM
               color: content.color,
               fontSize: content.fontSize,
               fontWeight: _fontWeights[_option.fontWeight.clamp(0, _fontWeights.length - 1)],
+              fontFamily: content.fontFamily,
+              fontFamilyFallback: bundledEmojiFontFallback,
               shadows: content.hasStroke
                   ? [
                       Shadow(

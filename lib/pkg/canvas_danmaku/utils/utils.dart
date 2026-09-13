@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:pure_live/common/style/bundled_fonts.dart';
 import 'package:pure_live/plugins/emoji_manager.dart';
 import 'package:pure_live/pkg/canvas_danmaku/models/danmaku_content_item.dart';
 
@@ -157,6 +158,7 @@ class Utils {
             fontSize: fontSize,
             fontWeight: targetFontWeight,
             fontFamily: content.fontFamily,
+            fontFamilyFallback: bundledEmojiFontFallback,
           ),
         );
         mainBuilder.addText(item.value);
@@ -180,6 +182,7 @@ class Utils {
               fontSize: fontSize,
               fontWeight: targetFontWeight,
               fontFamily: content.fontFamily,
+              fontFamilyFallback: bundledEmojiFontFallback,
               foreground: Paint()
                 ..style = PaintingStyle.stroke
                 ..strokeWidth = 2.0
