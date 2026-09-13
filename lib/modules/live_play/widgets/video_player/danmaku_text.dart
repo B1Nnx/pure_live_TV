@@ -37,6 +37,7 @@ class DanmakuText extends StatelessWidget {
           decoration: TextDecoration.none,
           fontSize: fontSize,
           color: color,
+          fontFamilyFallback: bundledEmojiFontFallback,
         ),
       ),
     );
