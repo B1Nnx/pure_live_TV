@@ -44,13 +44,24 @@ class DanmakuController extends GetxController {
     _onUpdateOption?.call(newOption);
   }
 
-  @override
-  void onClose() {
+  /// Detach only the screen that installed these callbacks. A disposed screen
+  /// must not clear the callbacks of a newer screen using the same controller.
+  void unbind(void Function(DanmakuContentItem) onAddDanmaku) {
+    if (_onAddDanmaku != onAddDanmaku) return;
+    _clearCallbacks();
+  }
+
+  void _clearCallbacks() {
     _onAddDanmaku = null;
     _onUpdateOption = null;
     _onPause = null;
     _onResume = null;
     _onClear = null;
+  }
+
+  @override
+  void onClose() {
+    _clearCallbacks();
     super.onClose();
   }
 }
