@@ -56,6 +56,13 @@ jobs:
       - name: 更新Flutter的packages
         run: flutter pub get
 
+      - name: 验证弹幕生命周期与字体回退
+        run: >-
+          flutter test
+          test/canvas_danmaku_lifecycle_test.dart
+          test/danmaku_layout_cache_test.dart
+          test/bundled_emoji_font_test.dart
+
       - name: 打包APK
         run: flutter build apk --release --split-per-abi --target-platform android-arm,android-arm64,android-x64 --android-skip-build-dependency-validation
       

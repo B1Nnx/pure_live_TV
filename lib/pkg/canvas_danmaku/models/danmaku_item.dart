@@ -1,5 +1,5 @@
-import 'dart:ui' as ui;
 import 'package:pure_live/pkg/canvas_danmaku/models/danmaku_content_item.dart';
+import 'package:pure_live/pkg/canvas_danmaku/utils/utils.dart';
 
 class DanmakuItem {
   /// 弹幕内容
@@ -20,14 +20,9 @@ class DanmakuItem {
   /// 弹幕竖直方向位置
   double yPosition;
 
-  /// 上次绘制时间
-  int? lastDrawTick;
-
-  /// 弹幕布局缓存
-  ui.Paragraph? paragraph;
-  ui.Paragraph? strokeParagraph;
-
-  double? cachedWidth;
+  /// One lease held for as long as this item remains active.
+  DanmakuLayout? layout;
+  bool _disposed = false;
 
   DanmakuItem({
     required this.content,
@@ -36,9 +31,18 @@ class DanmakuItem {
     required this.width,
     this.xPosition = 0,
     this.yPosition = 0,
-    this.paragraph,
-    this.strokeParagraph,
-    this.lastDrawTick,
-    this.cachedWidth,
+    this.layout,
   });
+
+  void dispose() {
+    if (_disposed) return;
+    _disposed = true;
+    layout?.release();
+    layout = null;
+    final special = content;
+    if (special is SpecialDanmakuContentItem) {
+      special.painterCache?.dispose();
+      special.painterCache = null;
+    }
+  }
 }

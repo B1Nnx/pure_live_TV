@@ -36,8 +36,9 @@ class ScrollDanmakuPainter extends CustomPainter {
     final double startPosition = size.width;
 
     for (final item in scrollDanmakuItems) {
-      final currentWidth = item.cachedWidth;
-      if (currentWidth == null) continue;
+      final layout = item.layout;
+      if (layout == null) continue;
+      final currentWidth = layout.width;
 
       final int elapsedTime = tick - item.creationTime;
       final double timeProgress = elapsedTime / totalDuration;
@@ -53,13 +54,10 @@ class ScrollDanmakuPainter extends CustomPainter {
         continue;
       }
 
-      Utils.drawMixedContent(
+      Utils.drawLayout(
         canvas,
-        item.content,
+        layout,
         Offset(currentX, item.yPosition),
-        fontSize,
-        fontWeight,
-        showStroke,
         item.content.selfSend,
         _selfSendPaint,
       );
