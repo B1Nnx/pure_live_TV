@@ -183,14 +183,21 @@ class BetterPlayerAdapter implements UnifiedPlayer {
 
     await _cancelAllSubscriptions();
 
-    if (_controller != null) {
+    final controller = _controller;
+    if (controller != null) {
       try {
-        await _controller!.setVolume(0.0);
-        await _controller!.pause();
-        _controller!.dispose();
-        _controller = null;
+        await controller.setVolume(0.0);
+        await controller.pause();
+      } catch (e) {
+        debugPrint("BetterPlayer stop before dispose error: $e");
+      }
+
+      try {
+        controller.dispose(forceDispose: true);
       } catch (e) {
         debugPrint("BetterPlayer dispose error: $e");
+      } finally {
+        _controller = null;
       }
     }
 
